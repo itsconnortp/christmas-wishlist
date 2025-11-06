@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop for Others - <%= family.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><%= family.name %></h1>
+            <nav>
+                <a href="/family/<%= family.id %>">Back to Family</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </header>
+
+        <div class="card">
+            <h2>🛍️ Shop for Your Family</h2>
+            <p style="color: #666; margin-bottom: 30px;">
+                Choose gifts for your loved ones! They won't see who bought what until after Christmas.
+            </p>
+
+            <% if (Object.keys(itemsByUser).length === 0) { %>
+                <p style="text-align: center; color: #666; padding: 40px;">
+                    No one has added items to their wishlist yet. Check back soon!
+                </p>
+            <% } else { %>
+                <% Object.keys(itemsByUser).forEach(userId => { %>
+                    <% const userData = itemsByUser[userId]; %>
+
+                    <div style="margin-bottom: 40px;">
+                        <h3 style="color: var(--christmas-red); border-bottom: 2px solid var(--christmas-green); padding-bottom: 10px; margin-bottom: 20px;">
+                            🎁 <%= userData.name %>'s Wishlist
+                        </h3>
+
+                        <div class="grid grid-2">
+                            <% userData.items.forEach(item => { %>
+                                <div class="wishlist-item <%= item.purchase_id ? 'purchased' : '' %>">
+                                    <h3><%= item.title %></h3>
+
+                                    <% if (item.description) { %>
+                                        <p><%= item.description %></p>
+                                    <% } %>
+
+                                    <% if (item.price) { %>
+                                        <p class="price"><%= item.price %></p>
+                                    <% } %>
+
+                                    <% if (item.link) { %>
+                                        <p>
+                                            <a href="<%= item.link %>" target="_blank" style="color: var(--christmas-green); text-decoration: none;">
+                                                🔗 View Link
+                                            </a>
+                                        </p>
+                                    <% } %>
+
+                                    <div class="actions">
+                                        <% if (item.purchase_id) { %>
+                                            <% if (item.purchased_by === user.id) { %>
+                                                <span style="color: var(--christmas-gold); font-weight: bold;">✓ You bought this!</span>
+                                            <% } else { %>
+                                                <span style="color: #666;">✓ Someone claimed this</span>
+                                            <% } %>
+                                        <% } else { %>
+                                            <form action="/family/<%= family.id %>/shop/purchase/<%= item.id %>" method="POST" style="display: inline;">
+                                                <button type="submit" class="btn btn-primary" style="padding: 8px 16px;">Mark as Purchased</button>
+                                            </form>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

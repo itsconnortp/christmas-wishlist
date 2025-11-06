@@ -1,0 +1,470 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --christmas-red: #c41e3a;
+    --christmas-green: #0f8558;
+    --christmas-gold: #ffd700;
+    --christmas-white: #f8f9fa;
+    --dark-green: #0a5f3f;
+    --light-red: #ff6b7a;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-green) 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+header {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+header h1 {
+    color: var(--christmas-red);
+    font-size: 2rem;
+}
+
+header h1::before {
+    content: '🎄 ';
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--christmas-green);
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+nav a:hover {
+    background: rgba(15, 133, 88, 0.1);
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background: var(--christmas-red);
+    color: white;
+}
+
+.btn-secondary {
+    background: var(--christmas-green);
+    color: white;
+}
+
+.btn-outline {
+    background: white;
+    color: var(--christmas-green);
+    border: 2px solid var(--christmas-green);
+}
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    color: var(--christmas-red);
+    margin-bottom: 20px;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--christmas-green);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.error {
+    background: #fee;
+    color: #c00;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 2px solid #fcc;
+}
+
+/* Grid layouts */
+.grid {
+    display: grid;
+    gap: 20px;
+}
+
+.grid-2 {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Wishlist items */
+.wishlist-item {
+    background: #f8f9ff;
+    padding: 20px;
+    border-radius: 8px;
+    border-left: 4px solid var(--christmas-green);
+    position: relative;
+}
+
+.wishlist-item.purchased {
+    opacity: 0.6;
+    border-left-color: var(--christmas-gold);
+}
+
+.wishlist-item h3 {
+    color: var(--christmas-red);
+    margin-bottom: 10px;
+}
+
+.wishlist-item p {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.wishlist-item .actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.wishlist-item .price {
+    font-weight: bold;
+    color: var(--christmas-green);
+}
+
+/* Families list */
+.family-card {
+    background: linear-gradient(135deg, var(--christmas-red), var(--light-red));
+    color: white;
+    padding: 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.family-card:hover {
+    transform: translateY(-5px);
+}
+
+.family-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.family-card .invite-code {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 12px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Christmas tree */
+.tree-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.tree {
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 250px solid var(--christmas-green);
+    margin: 0 auto 20px;
+    position: relative;
+}
+
+.tree::before {
+    content: '⭐';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+}
+
+.tree-trunk {
+    width: 60px;
+    height: 80px;
+    background: #8B4513;
+    margin: 0 auto;
+}
+
+.presents-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.present {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.present:hover {
+    transform: scale(1.1);
+}
+
+.present.small {
+    width: 60px;
+    height: 60px;
+}
+
+.present.medium {
+    width: 80px;
+    height: 80px;
+}
+
+.present.large {
+    width: 100px;
+    height: 100px;
+}
+
+.present.red { background: var(--christmas-red); }
+.present.green { background: var(--christmas-green); }
+.present.blue { background: #4169E1; }
+.present.gold { background: var(--christmas-gold); }
+.present.silver { background: #C0C0C0; }
+
+.present::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: rgba(255,255,255,0.8);
+    transform: translateY(-50%);
+}
+
+.present::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 8px;
+    background: rgba(255,255,255,0.8);
+    transform: translateX(-50%);
+}
+
+.present.unwrapped {
+    opacity: 0.5;
+    background: #ddd !important;
+}
+
+.countdown {
+    text-align: center;
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 30px;
+    background: rgba(0,0,0,0.3);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.countdown .days {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--christmas-gold);
+}
+
+/* Modal for unwrapped presents */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    max-width: 500px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    color: var(--christmas-red);
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+    }
+
+    nav {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .grid-2, .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    .tree {
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        border-bottom: 180px solid var(--christmas-green);
+    }
+}
+
+/* Welcome page */
+.hero {
+    text-align: center;
+    color: white;
+    padding: 60px 20px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.feature {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.feature h3 {
+    color: var(--christmas-red);
+    margin-bottom: 10px;
+}

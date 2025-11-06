@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Christmas Wishlist</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Christmas Wishlist</h1>
+            <nav>
+                <span>Welcome, <%= user.display_name %>!</span>
+                <a href="/logout">Logout</a>
+            </nav>
+        </header>
+
+        <div class="card">
+            <h2>Your Families</h2>
+            <div class="grid grid-2" style="margin-bottom: 20px;">
+                <a href="/family/create" class="btn btn-primary">Create New Family</a>
+                <a href="/family/join" class="btn btn-secondary">Join with Invite Code</a>
+            </div>
+
+            <% if (families.length === 0) { %>
+                <p style="text-align: center; color: #666; padding: 40px;">
+                    You haven't joined any families yet. Create one or join with an invite code!
+                </p>
+            <% } else { %>
+                <div class="grid grid-2">
+                    <% families.forEach(family => { %>
+                        <a href="/family/<%= family.id %>" style="text-decoration: none;">
+                            <div class="family-card">
+                                <h3><%= family.name %></h3>
+                                <p><%= family.member_count %> member<%= family.member_count !== 1 ? 's' : '' %></p>
+                                <div class="invite-code">
+                                    Code: <%= family.invite_code %>
+                                </div>
+                            </div>
+                        </a>
+                    <% }) %>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

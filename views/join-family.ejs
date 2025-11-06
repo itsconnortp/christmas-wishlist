@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Family - Christmas Wishlist</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Christmas Wishlist</h1>
+            <nav>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </header>
+
+        <div class="card" style="max-width: 600px; margin: 0 auto;">
+            <h2>Join a Family</h2>
+
+            <% if (error) { %>
+                <div class="error"><%= error %></div>
+            <% } %>
+
+            <form action="/family/join" method="POST">
+                <div class="form-group">
+                    <label for="inviteCode">Invite Code</label>
+                    <input type="text" id="inviteCode" name="inviteCode" placeholder="Enter the code shared with you" required style="text-transform: uppercase;">
+                </div>
+
+                <p style="color: #666; margin-bottom: 20px;">
+                    Ask your family organizer for the invite code to join their Christmas group!
+                </p>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Join Family</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

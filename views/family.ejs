@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= family.name %> - Christmas Wishlist</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><%= family.name %></h1>
+            <nav>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </header>
+
+        <div class="card">
+            <h2>Family Members</h2>
+            <div class="grid grid-3">
+                <% members.forEach(member => { %>
+                    <div style="background: #f8f9ff; padding: 20px; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+                        <h3 style="color: var(--christmas-red);"><%= member.display_name %></h3>
+                    </div>
+                <% }) %>
+            </div>
+
+            <div style="background: #fffacd; padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                <strong>Invite Code:</strong> <span style="font-size: 1.5rem; color: var(--christmas-red);"><%= family.invite_code %></span>
+                <p style="margin-top: 10px; color: #666;">Share this code with family members to invite them!</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>What Would You Like to Do?</h2>
+            <div class="grid grid-2">
+                <a href="/family/<%= family.id %>/my-list" class="btn btn-primary" style="padding: 30px; font-size: 1.2rem;">
+                    📝 My Wishlist
+                    <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.9;">Add items you want</p>
+                </a>
+
+                <a href="/family/<%= family.id %>/shop" class="btn btn-secondary" style="padding: 30px; font-size: 1.2rem;">
+                    🛍️ Shop for Others
+                    <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.9;">See what others want</p>
+                </a>
+
+                <a href="/family/<%= family.id %>/tree" class="btn btn-outline" style="padding: 30px; font-size: 1.2rem; border: 3px solid var(--christmas-gold); color: var(--christmas-red);">
+                    🎄 My Christmas Tree
+                    <p style="font-size: 0.9rem; margin-top: 10px;">See your gifts!</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Christmas Tree - <%= family.name %></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><%= family.name %></h1>
+            <nav>
+                <a href="/family/<%= family.id %>">Back to Family</a>
+                <a href="/dashboard">Dashboard</a>
+                <a href="/logout">Logout</a>
+            </nav>
+        </header>
+
+        <div class="card">
+            <h2>🎄 Your Christmas Tree</h2>
+
+            <% if (daysUntilChristmas > 0) { %>
+                <div class="countdown">
+                    <div class="days"><%= daysUntilChristmas %></div>
+                    <div>day<%= daysUntilChristmas !== 1 ? 's' : '' %> until Christmas!</div>
+                </div>
+            <% } else if (daysUntilChristmas === 0) { %>
+                <div class="countdown">
+                    <div class="days">🎉</div>
+                    <div>Merry Christmas! Click presents to unwrap them!</div>
+                </div>
+            <% } else { %>
+                <div class="countdown">
+                    <div style="font-size: 2rem;">🎁</div>
+                    <div>Christmas has passed! View your unwrapped gifts below.</div>
+                </div>
+            <% } %>
+
+            <div class="tree-container">
+                <div class="tree"></div>
+                <div class="tree-trunk"></div>
+
+                <% if (presents.length === 0) { %>
+                    <p style="text-align: center; color: #666; margin-top: 40px;">
+                        No presents yet! When someone buys you a gift, a present will appear here.
+                    </p>
+                <% } else { %>
+                    <div class="presents-container">
+                        <% presents.forEach(present => { %>
+                            <% if (!isChristmas && !present.unwrapped) { %>
+                                <div class="present <%= present.size %> <%= present.color %>" title="A gift for you!">
+                                    🎁
+                                </div>
+                            <% } else if (isChristmas && !present.unwrapped) { %>
+                                <form action="/family/<%= family.id %>/tree/unwrap/<%= present.id %>" method="POST" style="display: inline;">
+                                    <button type="submit" class="present <%= present.size %> <%= present.color %>" style="border: none; cursor: pointer;" title="Click to unwrap!">
+                                        🎁
+                                    </button>
+                                </form>
+                            <% } else { %>
+                                <div class="present <%= present.size %> <%= present.color %> unwrapped" title="<%= present.title %> from <%= present.gifter_name %>">
+                                    ✨
+                                </div>
+                            <% } %>
+                        <% }) %>
+                    </div>
+                <% } %>
+            </div>
+
+            <% if (presents.some(p => p.unwrapped)) { %>
+                <div style="margin-top: 40px; background: #f8f9ff; padding: 25px; border-radius: 8px;">
+                    <h3 style="color: var(--christmas-red); margin-bottom: 20px;">Unwrapped Gifts</h3>
+                    <div class="grid grid-2">
+                        <% presents.filter(p => p.unwrapped).forEach(present => { %>
+                            <div style="background: white; padding: 20px; border-radius: 8px; border-left: 4px solid var(--christmas-gold);">
+                                <h4 style="color: var(--christmas-green); margin-bottom: 10px;"><%= present.title %></h4>
+                                <p style="color: #666;">From: <strong><%= present.gifter_name %></strong></p>
+                                <p style="color: #999; font-size: 0.9rem; margin-top: 5px;">
+                                    Opened <%= new Date(present.unwrapped_at).toLocaleDateString() %>
+                                </p>
+                            </div>
+                        <% }) %>
+                    </div>
+                    <p style="margin-top: 20px; color: #666; font-style: italic;">
+                        💌 Don't forget to send thank you cards to these wonderful people!
+                    </p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>
