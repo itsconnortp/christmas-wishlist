@@ -16,8 +16,11 @@
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-green) 100%);
+    background-attachment: fixed;
     min-height: 100vh;
     padding: 20px;
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
 }
 
 .container {
@@ -77,11 +80,18 @@ nav a:hover {
     cursor: pointer;
     border: none;
     transition: transform 0.2s, box-shadow 0.2s;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
 .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .btn-primary {
